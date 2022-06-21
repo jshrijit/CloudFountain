@@ -10,9 +10,15 @@ const CardContainer = (props) => {
   const [isRejectModalOpen, setIsRejectModalOpen] = useState(false);
 
   const acceptHandler = () => {
-    console.log("clicked");
     setIsAcceptModalOpen(true);
   };
+
+  const rejectHandler = () => {
+    setIsRejectModalOpen(true);
+  };
+
+  const acceptToggleHandle = () => setIsAcceptModalOpen((prev) => !prev);
+  const rejectToggleHandle = () => setIsRejectModalOpen((prev) => !prev);
 
   return (
     <div className="card-container">
@@ -45,17 +51,23 @@ const CardContainer = (props) => {
             ACCEPT
           </button>
           <AppModal
-            title="Note"
-            body="Your request has been accepted"
+            title={title}
+            body={body}
             isModalOpen={isAcceptModalOpen}
+            toggle={acceptToggleHandle}
+            from="accept"
           />
         </div>
         <div>
-          <button className="btn btn-secondary">REJECT</button>
+          <button className="btn btn-secondary" onClick={rejectHandler}>
+            REJECT
+          </button>
           <AppModal
-            title="Note"
-            body="Your request has been rejected"
+            title={title}
+            body={body}
             isModalOpen={isRejectModalOpen}
+            toggle={rejectToggleHandle}
+            from="reject"
           />
         </div>
       </div>

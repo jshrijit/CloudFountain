@@ -1,15 +1,18 @@
-import React, { useState } from "react";
-import { Modal, ModalHeader, ModalBody } from "reactstrap";
+import React from "react";
+import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 const AppModal = (props) => {
-  const { title, body, isModalOpen } = props;
-  const [isOpen, setIsOpen] = useState(isModalOpen);
-  const toggle = () => setIsOpen((prev) => !prev);
+  const { title, body, isModalOpen, toggle, from } = props;
 
   return (
-    <Modal isOpen={isOpen} toggle={toggle} className="modal-container">
+    <Modal isOpen={isModalOpen} toggle={toggle} className="modal-container">
       <ModalHeader toggle={toggle}>{title}</ModalHeader>
       <ModalBody>{body}</ModalBody>
+      <ModalFooter style={{ borderTop: "none" }}>
+        <button onClick={toggle} className="btn btn-primary">
+          {from === "accept" ? "Confirm Acceptance" : "Confirm Rejection"}
+        </button>
+      </ModalFooter>
     </Modal>
   );
 };
